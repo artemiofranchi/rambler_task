@@ -1,0 +1,44 @@
+# Smoke-конфигурация: синтетические данные + крошечный BERT, весь пайплайн за ~1–2 минуты без интернета.
+# Только для проверки, что код работает. Метрики здесь ничего не говорят о качестве.
+
+reports_dir: reports/smoke
+
+data:
+  hf_dataset: synthetic
+  processed_dir: data/smoke/processed
+  val_size: 0.2
+  seed: 42
+
+normalization:
+  enabled: true
+
+linear:
+  path: models/smoke/linear.joblib
+  char_ngram_range: [2, 5]
+  word_ngram_range: [1, 2]
+  char_features: 65536
+  word_features: 32768
+  C: 4.0
+
+transformer:
+  enabled: true
+  base_model: models/smoke/tiny-bert
+  path: models/smoke/transformer
+  max_length: 64
+  batch_size: 32
+  epochs: 1
+  lr: 1.0e-3
+  max_train_samples: null
+  device: cpu
+  num_threads: 0
+
+policy:
+  path: models/smoke/policy.json
+  target_recall: 0.95
+  target_block_precision: 0.90
+  strong_rule_confidence: 0.99
+
+service:
+  max_text_chars: 5000
+  batch_max_size: 64
+  batch_max_wait_ms: 5

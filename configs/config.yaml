@@ -1,0 +1,44 @@
+# Конфигурация сервиса модерации. Пути — относительно корня репозитория.
+# Переопределение через переменные окружения — см. README («Переменные окружения»).
+
+reports_dir: reports
+
+data:
+  hf_dataset: AlexSham/Toxic_Russian_Comments   # train ~223k, test ~25k, метка: 1 = токсично
+  processed_dir: data/processed
+  val_size: 0.1          # доля train под валидацию (стекинг + пороги)
+  seed: 42
+
+normalization:
+  enabled: true
+
+linear:                  # TF-IDF (символьные + словные n-граммы) + логистическая регрессия
+  path: models/linear.joblib
+  char_ngram_range: [2, 5]
+  word_ngram_range: [1, 2]
+  char_features: 1048576 # 2^20, хеширование — без словаря, артефакт маленький
+  word_features: 524288  # 2^19
+  C: 4.0
+
+transformer:             # дообученный rubert-tiny2
+  enabled: true
+  base_model: cointegrated/rubert-tiny2
+  path: models/transformer
+  max_length: 128
+  batch_size: 64
+  epochs: 1
+  lr: 5.0e-5
+  max_train_samples: 120000   # подвыборка для обучения за ~10–20 мин на ноутбуке; null = весь train
+  device: auto           # auto | cpu | cuda | mps
+  num_threads: 0         # потоки torch на CPU, 0 = по умолчанию
+
+policy:
+  path: models/policy.json
+  target_recall: 0.95           # доля нарушений, которые НЕ получают ALLOW (BLOCK + REVIEW)
+  target_block_precision: 0.90  # точность автоматической блокировки
+  strong_rule_confidence: 0.99  # confidence для срабатывания однозначного правила
+
+service:
+  max_text_chars: 5000
+  batch_max_size: 64     # микробатчинг одиночных запросов
+  batch_max_wait_ms: 5
