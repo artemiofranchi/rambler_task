@@ -1,0 +1,257 @@
+{
+  "test_size": 24829,
+  "toxic_share": 0.1796,
+  "throughput_offline_msgs_per_min": 179095,
+  "components": {
+    "linear": {
+      "precision@0.5": 0.9728,
+      "recall@0.5": 0.8809,
+      "f1@0.5": 0.9246,
+      "roc_auc": 0.9958,
+      "pr_auc": 0.9848
+    },
+    "transformer": {
+      "precision@0.5": 0.914,
+      "recall@0.5": 0.9294,
+      "f1@0.5": 0.9216,
+      "roc_auc": 0.9924,
+      "pr_auc": 0.9753
+    },
+    "rules_strong": {
+      "precision@0.5": 0.9803,
+      "recall@0.5": 0.4679,
+      "f1@0.5": 0.6335
+    },
+    "ensemble": {
+      "precision@0.5": 0.9513,
+      "recall@0.5": 0.9372,
+      "f1@0.5": 0.9442,
+      "roc_auc": 0.9965,
+      "pr_auc": 0.9869
+    }
+  },
+  "decisions": {
+    "share_allow": 0.8033,
+    "share_review": 0.0222,
+    "share_block": 0.1745,
+    "recall_violations": 0.9753,
+    "miss_rate": 0.0247,
+    "auto_recall": 0.9285,
+    "block_precision": 0.9557,
+    "false_block_rate": 0.0094,
+    "ensemble_roc_auc": 0.9965
+  },
+  "policy": {
+    "t_allow": 0.170168169378999,
+    "t_block": 0.6240032267302253,
+    "target_recall": 0.97,
+    "target_block_precision": 0.95,
+    "calibration_set": {
+      "share_allow": 0.8019155030433226,
+      "share_review": 0.023540995345506625,
+      "share_block": 0.17454350161117077,
+      "recall_violations": 0.9701046337817638,
+      "miss_rate": 0.029895366218236172,
+      "auto_recall": 0.9232685600398605,
+      "block_precision": 0.9502564102564103,
+      "false_block_rate": 0.010583742498636115
+    }
+  },
+  "categories_in_flagged": {
+    "insult": 0.4385,
+    "toxicity": 0.3375,
+    "profanity": 0.3178,
+    "threat": 0.0094,
+    "illegal_activity": 0.0016
+  },
+  "examples": {
+    "ALLOW": [
+      "хорошо пошло!",
+      "посмотрела, как будто дома побывала. как река ахтуба обмельчала: раньше по ней катера ходили и в волгоград на катере можно было добраться, а сейчас не",
+      "отдам котят 1,5 месяца в добрые руки."
+    ],
+    "REVIEW": [
+      "всегда думаю, что за идиот такие посты выставляет, что стыдного в деревенской жизни?!!!",
+      "жрет небось как хряк.",
+      "еще бы вот хотелось добавить, стать бы пастуху на степи и ведите к нему коров сами, хыть на веревках и забирайте со степи, вот тогда и иссякнут пробле"
+    ],
+    "BLOCK": [
+      "тогда идите нахуй сутки",
+      "прикинь хитро, однако - как иудеи относятся к национальностям других людей 👆👆👆 т.е. если человек гой ( идиот ) - мусульмане, православные, католики, п",
+      "один хуй порвём всех а таких судей бог накажет"
+    ]
+  },
+  "robustness": {
+    "samples": 3000,
+    "results": {
+      "clean": {
+        "with_normalization": {
+          "share_allow": 0.804,
+          "share_review": 0.0197,
+          "share_block": 0.1763,
+          "recall_violations": 0.9833,
+          "miss_rate": 0.0167,
+          "auto_recall": 0.9481,
+          "block_precision": 0.966,
+          "false_block_rate": 0.0073,
+          "ensemble_roc_auc": 0.9975
+        },
+        "without_normalization": {
+          "share_allow": 0.8047,
+          "share_review": 0.0207,
+          "share_block": 0.1747,
+          "recall_violations": 0.9814,
+          "miss_rate": 0.0186,
+          "auto_recall": 0.9406,
+          "block_precision": 0.9676,
+          "false_block_rate": 0.0069,
+          "ensemble_roc_auc": 0.9976
+        }
+      },
+      "homoglyph": {
+        "with_normalization": {
+          "share_allow": 0.804,
+          "share_review": 0.0197,
+          "share_block": 0.1763,
+          "recall_violations": 0.9833,
+          "miss_rate": 0.0167,
+          "auto_recall": 0.9481,
+          "block_precision": 0.966,
+          "false_block_rate": 0.0073,
+          "ensemble_roc_auc": 0.9975
+        },
+        "without_normalization": {
+          "share_allow": 0.8633,
+          "share_review": 0.0347,
+          "share_block": 0.102,
+          "recall_violations": 0.7124,
+          "miss_rate": 0.2876,
+          "auto_recall": 0.5566,
+          "block_precision": 0.9804,
+          "false_block_rate": 0.0024,
+          "ensemble_roc_auc": 0.9655
+        }
+      },
+      "leet": {
+        "with_normalization": {
+          "share_allow": 0.804,
+          "share_review": 0.0197,
+          "share_block": 0.1763,
+          "recall_violations": 0.9833,
+          "miss_rate": 0.0167,
+          "auto_recall": 0.9481,
+          "block_precision": 0.966,
+          "false_block_rate": 0.0073,
+          "ensemble_roc_auc": 0.9975
+        },
+        "without_normalization": {
+          "share_allow": 0.8443,
+          "share_review": 0.0317,
+          "share_block": 0.124,
+          "recall_violations": 0.8033,
+          "miss_rate": 0.1967,
+          "auto_recall": 0.6735,
+          "block_precision": 0.9758,
+          "false_block_rate": 0.0037,
+          "ensemble_roc_auc": 0.9771
+        }
+      },
+      "spacing": {
+        "with_normalization": {
+          "share_allow": 0.8057,
+          "share_review": 0.0263,
+          "share_block": 0.168,
+          "recall_violations": 0.9722,
+          "miss_rate": 0.0278,
+          "auto_recall": 0.9017,
+          "block_precision": 0.9643,
+          "false_block_rate": 0.0073,
+          "ensemble_roc_auc": 0.9963
+        },
+        "without_normalization": {
+          "share_allow": 0.9253,
+          "share_review": 0.0333,
+          "share_block": 0.0413,
+          "recall_violations": 0.3729,
+          "miss_rate": 0.6271,
+          "auto_recall": 0.2226,
+          "block_precision": 0.9677,
+          "false_block_rate": 0.0016,
+          "ensemble_roc_auc": 0.876
+        }
+      },
+      "repeat": {
+        "with_normalization": {
+          "share_allow": 0.804,
+          "share_review": 0.0197,
+          "share_block": 0.1763,
+          "recall_violations": 0.9833,
+          "miss_rate": 0.0167,
+          "auto_recall": 0.9481,
+          "block_precision": 0.966,
+          "false_block_rate": 0.0073,
+          "ensemble_roc_auc": 0.9975
+        },
+        "without_normalization": {
+          "share_allow": 0.824,
+          "share_review": 0.039,
+          "share_block": 0.137,
+          "recall_violations": 0.9147,
+          "miss_rate": 0.0853,
+          "auto_recall": 0.7458,
+          "block_precision": 0.9781,
+          "false_block_rate": 0.0037,
+          "ensemble_roc_auc": 0.994
+        }
+      },
+      "mask": {
+        "with_normalization": {
+          "share_allow": 0.8197,
+          "share_review": 0.043,
+          "share_block": 0.1373,
+          "recall_violations": 0.8293,
+          "miss_rate": 0.1707,
+          "auto_recall": 0.6772,
+          "block_precision": 0.8859,
+          "false_block_rate": 0.0191,
+          "ensemble_roc_auc": 0.9733
+        },
+        "without_normalization": {
+          "share_allow": 0.823,
+          "share_review": 0.042,
+          "share_block": 0.135,
+          "recall_violations": 0.8145,
+          "miss_rate": 0.1855,
+          "auto_recall": 0.6642,
+          "block_precision": 0.884,
+          "false_block_rate": 0.0191,
+          "ensemble_roc_auc": 0.9725
+        }
+      },
+      "zero_width": {
+        "with_normalization": {
+          "share_allow": 0.804,
+          "share_review": 0.0197,
+          "share_block": 0.1763,
+          "recall_violations": 0.9833,
+          "miss_rate": 0.0167,
+          "auto_recall": 0.9481,
+          "block_precision": 0.966,
+          "false_block_rate": 0.0073,
+          "ensemble_roc_auc": 0.9975
+        },
+        "without_normalization": {
+          "share_allow": 0.8777,
+          "share_review": 0.0763,
+          "share_block": 0.046,
+          "recall_violations": 0.6456,
+          "miss_rate": 0.3544,
+          "auto_recall": 0.2523,
+          "block_precision": 0.9855,
+          "false_block_rate": 0.0008,
+          "ensemble_roc_auc": 0.988
+        }
+      }
+    }
+  }
+}

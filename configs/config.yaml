@@ -35,8 +35,8 @@ transformer:             # дообученный rubert-tiny2
 
 policy:
   path: models/policy.json
-  target_recall: 0.95           # доля нарушений, которые НЕ получают ALLOW (BLOCK + REVIEW)
-  target_block_precision: 0.90  # точность автоматической блокировки
+  target_recall: 0.97           # доля нарушений, которые НЕ получают ALLOW (BLOCK + REVIEW)
+  target_block_precision: 0.95  # точность автоматической блокировки
   strong_rule_confidence: 0.99  # confidence для срабатывания однозначного правила
 
 service:

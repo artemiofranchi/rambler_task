@@ -104,11 +104,11 @@ def to_markdown(r):
              "## Компоненты", "", "| компонент | ROC-AUC | PR-AUC | precision@0.5 | recall@0.5 | F1@0.5 |",
              "|---|---|---|---|---|---|"]
     for name, m in r["components"].items():
-        lines.append(f"| {name} | {m.get('roc_auc', '—')} | {m.get('pr_auc', '—')} | {m['precision@0.5']} | "
+        lines.append(f"| {name} | {m.get('roc_auc', '-')} | {m.get('pr_auc', '-')} | {m['precision@0.5']} | "
                      f"{m['recall@0.5']} | {m['f1@0.5']} |")
     d = r["decisions"]
     lines += ["", "## Решения сервиса", "",
-              f"Пороги: ALLOW < {r['policy']['t_allow']:.3f} ≤ REVIEW < {r['policy']['t_block']:.3f} ≤ BLOCK", "",
+              f"Пороги: ALLOW < {r['policy']['t_allow']:.3f} <= REVIEW < {r['policy']['t_block']:.3f} <= BLOCK", "",
               "| ALLOW | REVIEW | BLOCK | нарушения пойманы (BLOCK+REVIEW) | пропущено нарушений | "
               "заблокировано автоматически | точность BLOCK | ложные блокировки |",
               "|---|---|---|---|---|---|---|---|",

@@ -1,0 +1,15 @@
+{
+  "mode": "single",
+  "concurrency": 32,
+  "duration_s": 30.1,
+  "batch_size": 1,
+  "messages": 11803,
+  "errors": 0,
+  "throughput_msgs_per_min": 23561,
+  "requests_per_s": 392.7,
+  "latency_ms": {
+    "p50": 42.6,
+    "p95": 252.4,
+    "p99": 418.4
+  }
+}

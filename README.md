@@ -11,6 +11,46 @@ POST /moderate  {"text": "Я тебя н а й д у, понял?"}
 
 ---
 
+## Результаты
+
+Тест: 24 829 комментариев, 18% токсичных. Сервис работает на CPU, MacBook на Apple Silicon. Полные отчеты: [`reports/metrics.md`](reports/metrics.md), [`reports/SUMMARY.md`](reports/SUMMARY.md).
+
+**Качество компонентов**
+
+| компонент | ROC-AUC | PR-AUC |
+|---|---|---|
+| TF-IDF + LogReg | 0.9958 | 0.9848 |
+| rubert-tiny2 | 0.9924 | 0.9753 |
+| **ансамбль** | **0.9965** | **0.9869** |
+
+Однозначные правила: точность 98%, покрывают 47% нарушений.
+
+**Решения сервиса** (цели: поймать >= 97% нарушений, точность автоблокировки >= 95%)
+
+| ALLOW | REVIEW | BLOCK | поймано нарушений | пропущено | точность BLOCK | ложные блокировки |
+|---|---|---|---|---|---|---|
+| 80.3% | 2.2% | 17.4% | 97.5% | 2.5% | 95.6% | 0.9% |
+
+Пороги: ALLOW при P < 0.170, BLOCK при P >= 0.624, между ними REVIEW. Как меняется баланс при других целях: [`reports/tradeoff.md`](reports/tradeoff.md).
+
+**Устойчивость к обходам** (доля пойманных нарушений, 3 000 текстов из теста)
+
+| искажение | пример | с нормализацией | без нормализации |
+|---|---|---|---|
+| без искажений | - | 98.3% | 98.1% |
+| латиница | `дуpак` | 98.3% | 71.2% |
+| цифры и символы | `3л0й` | 98.3% | 80.3% |
+| разрядка | `д у р а к` | 97.2% | 37.3% |
+| повторы | `тупоооой` | 98.3% | 91.5% |
+| невидимые символы | `ду\u200bрак` | 98.3% | 64.6% |
+| звездочки | `д*рак` | 82.9% | 81.5% |
+
+**Скорость (CPU)**
+
+- `POST /moderate`, 32 параллельных клиента: **23 561 messages/min**, p50 43 мс, p95 252 мс, 0 ошибок
+- `POST /moderate/batch` по 64 сообщения: **71 956 messages/min**
+- офлайн, без HTTP: до **135 156 messages/min**
+
 ## Содержание
 
 1. [Быстрый старт](#быстрый-старт)
@@ -32,12 +72,12 @@ POST /moderate  {"text": "Я тебя н а й д у, понял?"}
 ## Быстрый старт
 
 ```bash
-git clone https://github.com/<user>/ugc-moderation.git && cd ugc-moderation
+git clone https://github.com/artemiofranchi/rambler_task.git && cd rambler_task
 python3 -m venv .venv && source .venv/bin/activate
 make install
 
 # вариант А: скачать обученные модели (~1 мин)
-make download-models MODELS_URL=https://github.com/<user>/ugc-moderation/releases/download/v1.0.0/models.tar.gz
+make download-models MODELS_URL=https://github.com/artemiofranchi/rambler_task/releases/download/v1.0.0/models.tar.gz
 # вариант Б: обучить с нуля (~20-40 мин на ноутбуке)
 make data train
 
@@ -109,8 +149,8 @@ flowchart LR
 | Вопрос | Ответ | Реализация |
 |---|---|---|
 | Целевой список категорий? | Нет, на усмотрение | Своя таксономия: `profanity` (мат), `insult` (оскорбления), `threat` (угрозы), `illegal_activity` (наркотики, документы, оружие). Если нарушение нашли модели, а не правила, - `toxicity` |
-| Что критичнее? | Пропуск нарушения | Порог `t_allow` подбирается так, чтобы **>= 95% нарушений не получали ALLOW** (`policy.target_recall`) |
-| Сколько отдавать на ручную модерацию? | Минимум; можно ансамбль алгоритмов | Три алгоритма + стекинг. Порог `t_block` - минимальный, при котором точность автоблокировки >= 90% (`policy.target_block_precision`): так зона REVIEW получается **минимальной** при заданном качестве BLOCK |
+| Что критичнее? | Пропуск нарушения | Порог `t_allow` подбирается так, чтобы **>= 97% нарушений не получали ALLOW** (`policy.target_recall`) |
+| Сколько отдавать на ручную модерацию? | Минимум; можно ансамбль алгоритмов | Три алгоритма + стекинг. Порог `t_block` - минимальный, при котором точность автоблокировки >= 95% (`policy.target_block_precision`): так зона REVIEW получается **минимальной** при заданном качестве BLOCK |
 
 Как меняется доля REVIEW при других целях - таблица [`reports/tradeoff.md`](reports/tradeoff.md). Цели меняются в конфиге или переменными окружения без переобучения моделей: нужен только `make calibrate`.
 
@@ -162,7 +202,7 @@ make train
 **Готовые модели** вместо обучения:
 
 ```bash
-make download-models MODELS_URL=https://github.com/<user>/ugc-moderation/releases/download/v1.0.0/models.tar.gz
+make download-models MODELS_URL=https://github.com/artemiofranchi/rambler_task/releases/download/v1.0.0/models.tar.gz
 ```
 
 Архив для релиза собирается командой `make package-models`.
@@ -200,12 +240,12 @@ curl -s -X POST http://localhost:8000/moderate \
 {"decision": "BLOCK", "categories": ["illegal_activity"], "confidence": 0.99}
 ```
 
-С параметром `?explain=true` в ответ добавляются фрагменты, на которых сработали правила, и оценки каждого компонента:
+С параметром `?explain=true` в ответ добавляются фрагменты, на которых сработали правила, и оценки каждого компонента. Например, для `{"text": "я убью его"}`:
 
 ```json
-{"decision": "BLOCK", "categories": ["illegal_activity"], "confidence": 0.99,
- "evidence": ["закладки", "меф"],
- "scores": {"linear": 0.93, "transformer": 0.97, "ensemble": 0.99}}
+{"decision": "BLOCK", "categories": ["threat"], "confidence": 0.99,
+ "evidence": ["убью его"],
+ "scores": {"linear": 0.8772, "transformer": 0.8489, "ensemble": 0.9723}}
 ```
 
 Пакетный запрос:
@@ -288,8 +328,8 @@ make report             # сводка                -> reports/SUMMARY.md
 | `MODERATION_DEVICE` | `cpu` | устройство инференса трансформера в сервисе: `cpu` / `cuda` / `mps` / `auto` |
 | `MODERATION_USE_TRANSFORMER` | `true` | выключить трансформер (нужна перекалибровка: `make calibrate`) |
 | `MODERATION_TORCH_THREADS` | `0` (по умолчанию torch) | число потоков CPU |
-| `MODERATION_TARGET_RECALL` | `0.95` | доля нарушений, не получающих ALLOW (для `make calibrate`) |
-| `MODERATION_TARGET_BLOCK_PRECISION` | `0.90` | точность автоблокировки (для `make calibrate`) |
+| `MODERATION_TARGET_RECALL` | `0.97` | доля нарушений, не получающих ALLOW (для `make calibrate`) |
+| `MODERATION_TARGET_BLOCK_PRECISION` | `0.95` | точность автоблокировки (для `make calibrate`) |
 | `MODERATION_BATCH_MAX_SIZE` | `64` | максимальный размер микробатча |
 | `MODERATION_BATCH_MAX_WAIT_MS` | `5` | максимальное ожидание сборки батча |
 

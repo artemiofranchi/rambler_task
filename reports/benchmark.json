@@ -1,0 +1,32 @@
+{
+  "samples": 5000,
+  "components": [
+    "rules",
+    "linear",
+    "transformer"
+  ],
+  "batch": {
+    "1": {
+      "msgs_per_min": 40727,
+      "ms_per_msg": 1.473
+    },
+    "16": {
+      "msgs_per_min": 87767,
+      "ms_per_msg": 0.684
+    },
+    "64": {
+      "msgs_per_min": 72624,
+      "ms_per_msg": 0.826
+    },
+    "256": {
+      "msgs_per_min": 135156,
+      "ms_per_msg": 0.444
+    }
+  },
+  "ms_per_msg_by_component": {
+    "normalize": 0.015,
+    "rules": 0.0657,
+    "linear": 0.0435,
+    "transformer": 0.2097
+  }
+}

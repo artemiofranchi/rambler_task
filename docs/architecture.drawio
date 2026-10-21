@@ -1,0 +1,232 @@
+<mxfile host="app.diagrams.net" type="device">
+  <diagram id="online" name="1. Путь запроса">
+    <mxGraphModel dx="1400" dy="800" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1540" pageHeight="560" math="0" shadow="0">
+      <root>
+        <mxCell id="online-0" />
+        <mxCell id="online-1" parent="online-0" />
+        <mxCell id="online-1" value="Сервис модерации UGC: путь запроса" style="text;html=1;align=left;verticalAlign=middle;fontSize=20;fontStyle=1;fontColor=#1b201e;fontFamily=Helvetica;" vertex="1" parent="online-1">
+          <mxGeometry x="40" y="10" width="700" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="online-2" value="&lt;b&gt;Клиент&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:11px&quot; face=&quot;Courier New&quot; color=&quot;#5d6763&quot;&gt;POST /moderate&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=10;fontFamily=Helvetica;fontSize=13;fillColor=#ffffff;strokeColor=#9aa5a0;" vertex="1" parent="online-1">
+          <mxGeometry x="40" y="230" width="120" height="64" as="geometry" />
+        </mxCell>
+        <mxCell id="online-3" value="&lt;b&gt;FastAPI&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:11px&quot; face=&quot;Courier New&quot; color=&quot;#5d6763&quot;&gt;валидация · /batch&lt;/font&gt;&lt;br&gt;&lt;font style=&quot;font-size:11px&quot; face=&quot;Courier New&quot; color=&quot;#5d6763&quot;&gt;/health · /docs&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=10;fontFamily=Helvetica;fontSize=13;fillColor=#ffffff;strokeColor=#9aa5a0;" vertex="1" parent="online-1">
+          <mxGeometry x="200" y="222" width="150" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="online-4" value="&lt;b&gt;Микробатчер&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:11px&quot; face=&quot;Courier New&quot; color=&quot;#5d6763&quot;&gt;≤ 64 текста&lt;/font&gt;&lt;br&gt;&lt;font style=&quot;font-size:11px&quot; face=&quot;Courier New&quot; color=&quot;#5d6763&quot;&gt;или 5 мс&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=10;fontFamily=Helvetica;fontSize=13;fillColor=#ffffff;strokeColor=#9aa5a0;" vertex="1" parent="online-1">
+          <mxGeometry x="390" y="222" width="150" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="online-5" value="&lt;b&gt;Нормализация&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:11px&quot; face=&quot;Courier New&quot; color=&quot;#5d6763&quot;&gt;дуpак → дурак&lt;/font&gt;&lt;br&gt;&lt;font style=&quot;font-size:11px&quot; face=&quot;Courier New&quot; color=&quot;#5d6763&quot;&gt;д у р а к → дурак&lt;/font&gt;&lt;br&gt;&lt;font style=&quot;font-size:11px&quot; face=&quot;Courier New&quot; color=&quot;#5d6763&quot;&gt;3л0й → злой&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=10;fontFamily=Helvetica;fontSize=13;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="online-1">
+          <mxGeometry x="580" y="214" width="160" height="96" as="geometry" />
+        </mxCell>
+        <mxCell id="online-6" value="ТРИ ДЕТЕКТОРА" style="rounded=1;whiteSpace=wrap;html=1;arcSize=4;fillColor=none;dashed=1;strokeColor=#9aa5a0;verticalAlign=bottom;spacingBottom=6;fontSize=11;fontColor=#5d6763;fontFamily=Courier New;" vertex="1" parent="online-1">
+          <mxGeometry x="775" y="90" width="210" height="360" as="geometry" />
+        </mxCell>
+        <mxCell id="online-7" value="&lt;b&gt;Правила и словари&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:11px&quot; face=&quot;Courier New&quot; color=&quot;#5d6763&quot;&gt;категории&lt;/font&gt;&lt;br&gt;&lt;font style=&quot;font-size:11px&quot; face=&quot;Courier New&quot; color=&quot;#5d6763&quot;&gt;strong / weak&lt;/font&gt;&lt;br&gt;&lt;font style=&quot;font-size:11px&quot; face=&quot;Courier New&quot; color=&quot;#5d6763&quot;&gt;evidence&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=10;fontFamily=Helvetica;fontSize=13;fillColor=#ffffff;strokeColor=#9aa5a0;" vertex="1" parent="online-1">
+          <mxGeometry x="795" y="110" width="170" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="online-8" value="&lt;b&gt;TF-IDF + LogReg&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:11px&quot; face=&quot;Courier New&quot; color=&quot;#5d6763&quot;&gt;символьные и словные&lt;/font&gt;&lt;br&gt;&lt;font style=&quot;font-size:11px&quot; face=&quot;Courier New&quot; color=&quot;#5d6763&quot;&gt;n-граммы&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=10;fontFamily=Helvetica;fontSize=13;fillColor=#ffffff;strokeColor=#9aa5a0;" vertex="1" parent="online-1">
+          <mxGeometry x="795" y="225" width="170" height="76" as="geometry" />
+        </mxCell>
+        <mxCell id="online-9" value="&lt;b&gt;rubert-tiny2&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:11px&quot; face=&quot;Courier New&quot; color=&quot;#5d6763&quot;&gt;дообученный&lt;/font&gt;&lt;br&gt;&lt;font style=&quot;font-size:11px&quot; face=&quot;Courier New&quot; color=&quot;#5d6763&quot;&gt;29M параметров&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=10;fontFamily=Helvetica;fontSize=13;fillColor=#ffffff;strokeColor=#9aa5a0;" vertex="1" parent="online-1">
+          <mxGeometry x="795" y="330" width="170" height="76" as="geometry" />
+        </mxCell>
+        <mxCell id="online-10" value="&lt;b&gt;Стекинг&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:11px&quot; face=&quot;Courier New&quot; color=&quot;#5d6763&quot;&gt;LogReg поверх сигналов&lt;/font&gt;&lt;br&gt;&lt;font style=&quot;font-size:11px&quot; face=&quot;Courier New&quot; color=&quot;#5d6763&quot;&gt;→ P(нарушение)&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=10;fontFamily=Helvetica;fontSize=13;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="online-1">
+          <mxGeometry x="1030" y="222" width="170" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="online-11" value="&lt;b&gt;Политика&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:11px&quot; face=&quot;Courier New&quot; color=&quot;#5d6763&quot;&gt;пороги&lt;/font&gt;&lt;br&gt;&lt;font style=&quot;font-size:11px&quot; face=&quot;Courier New&quot; color=&quot;#5d6763&quot;&gt;t_allow · t_block&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=10;fontFamily=Helvetica;fontSize=13;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="online-1">
+          <mxGeometry x="1240" y="222" width="130" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="online-12" value="BLOCK" style="rounded=1;whiteSpace=wrap;html=1;arcSize=10;fontFamily=Helvetica;fontSize=13;arcSize=50;fillColor=#f8cecc;strokeColor=#b85450;fontColor=#9e2f29;fontStyle=1;fontFamily=Courier New;" vertex="1" parent="online-1">
+          <mxGeometry x="1410" y="140" width="110" height="44" as="geometry" />
+        </mxCell>
+        <mxCell id="online-13" value="REVIEW" style="rounded=1;whiteSpace=wrap;html=1;arcSize=10;fontFamily=Helvetica;fontSize=13;arcSize=50;fillColor=#ffe6cc;strokeColor=#d79b00;fontColor=#8a5a00;fontStyle=1;fontFamily=Courier New;" vertex="1" parent="online-1">
+          <mxGeometry x="1410" y="240" width="110" height="44" as="geometry" />
+        </mxCell>
+        <mxCell id="online-14" value="ALLOW" style="rounded=1;whiteSpace=wrap;html=1;arcSize=10;fontFamily=Helvetica;fontSize=13;arcSize=50;fillColor=#d5e8d4;strokeColor=#82b366;fontColor=#2e6b3a;fontStyle=1;fontFamily=Courier New;" vertex="1" parent="online-1">
+          <mxGeometry x="1410" y="340" width="110" height="44" as="geometry" />
+        </mxCell>
+        <mxCell id="online-15" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;endFill=1;strokeColor=#5d6763;fontSize=11;fontFamily=Courier New;fontColor=#5d6763;labelBackgroundColor=#ffffff;" edge="1" parent="online-1" source="online-2" target="online-3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="online-16" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;endFill=1;strokeColor=#5d6763;fontSize=11;fontFamily=Courier New;fontColor=#5d6763;labelBackgroundColor=#ffffff;" edge="1" parent="online-1" source="online-3" target="online-4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="online-17" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;endFill=1;strokeColor=#5d6763;fontSize=11;fontFamily=Courier New;fontColor=#5d6763;labelBackgroundColor=#ffffff;" edge="1" parent="online-1" source="online-4" target="online-5">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="online-18" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;endFill=1;strokeColor=#5d6763;fontSize=11;fontFamily=Courier New;fontColor=#5d6763;labelBackgroundColor=#ffffff;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="online-1" source="online-5" target="online-7">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="online-19" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;endFill=1;strokeColor=#5d6763;fontSize=11;fontFamily=Courier New;fontColor=#5d6763;labelBackgroundColor=#ffffff;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="online-1" source="online-5" target="online-8">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="online-20" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;endFill=1;strokeColor=#5d6763;fontSize=11;fontFamily=Courier New;fontColor=#5d6763;labelBackgroundColor=#ffffff;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="online-1" source="online-5" target="online-9">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="online-21" value="weak" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;endFill=1;strokeColor=#5d6763;fontSize=11;fontFamily=Courier New;fontColor=#5d6763;labelBackgroundColor=#ffffff;entryX=0;entryY=0.25;entryDx=0;entryDy=0;" edge="1" parent="online-1" source="online-7" target="online-10">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="online-22" value="logit" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;endFill=1;strokeColor=#5d6763;fontSize=11;fontFamily=Courier New;fontColor=#5d6763;labelBackgroundColor=#ffffff;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="online-1" source="online-8" target="online-10">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="online-23" value="logit" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;endFill=1;strokeColor=#5d6763;fontSize=11;fontFamily=Courier New;fontColor=#5d6763;labelBackgroundColor=#ffffff;entryX=0;entryY=0.75;entryDx=0;entryDy=0;" edge="1" parent="online-1" source="online-9" target="online-10">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="online-24" value="P" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;endFill=1;strokeColor=#5d6763;fontSize=11;fontFamily=Courier New;fontColor=#5d6763;labelBackgroundColor=#ffffff;" edge="1" parent="online-1" source="online-10" target="online-11">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="online-25" value="P ≥ t_block" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;endFill=1;strokeColor=#5d6763;fontSize=11;fontFamily=Courier New;fontColor=#5d6763;labelBackgroundColor=#ffffff;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="online-1" source="online-11" target="online-12">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="online-26" value="между" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;endFill=1;strokeColor=#5d6763;fontSize=11;fontFamily=Courier New;fontColor=#5d6763;labelBackgroundColor=#ffffff;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="online-1" source="online-11" target="online-13">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="online-27" value="P &lt; t_allow" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;endFill=1;strokeColor=#5d6763;fontSize=11;fontFamily=Courier New;fontColor=#5d6763;labelBackgroundColor=#ffffff;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="online-1" source="online-11" target="online-14">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="online-28" value="strong-правило (мат, угроза, сбыт) → BLOCK сразу, confidence ≥ 0.99" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;endFill=1;strokeColor=#b85450;dashed=1;strokeWidth=1.5;fontSize=11;fontFamily=Courier New;fontColor=#9e2f29;labelBackgroundColor=#ffffff;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="online-1" source="online-7" target="online-12">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="880" y="60" />
+              <mxPoint x="1465" y="60" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="online-29" value="Ответ: &lt;font face=&quot;Courier New&quot;&gt;{&quot;decision&quot;: &quot;BLOCK&quot;, &quot;categories&quot;: [&quot;profanity&quot;, &quot;insult&quot;], &quot;confidence&quot;: 0.99}&lt;/font&gt;&lt;br&gt;Категории дают правила; если нарушение нашли только модели — &lt;font face=&quot;Courier New&quot;&gt;toxicity&lt;/font&gt;. С &lt;font face=&quot;Courier New&quot;&gt;?explain=true&lt;/font&gt; добавляются фрагменты текста и оценки каждого компонента." style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=top;fontSize=12;fontColor=#5d6763;fontFamily=Helvetica;" vertex="1" parent="online-1">
+          <mxGeometry x="40" y="470" width="1100" height="60" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="policy" name="2. Пороги решений">
+    <mxGraphModel dx="1400" dy="800" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1200" pageHeight="460" math="0" shadow="0">
+      <root>
+        <mxCell id="policy-0" />
+        <mxCell id="policy-1" parent="policy-0" />
+        <mxCell id="policy-1" value="Как принимается решение" style="text;html=1;align=left;verticalAlign=middle;fontSize=20;fontStyle=1;fontColor=#1b201e;fontFamily=Helvetica;" vertex="1" parent="policy-1">
+          <mxGeometry x="40" y="10" width="600" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="policy-2" value="ALLOW" style="rounded=0;whiteSpace=wrap;html=1;fontStyle=1;fontFamily=Courier New;fontSize=13;fillColor=#d5e8d4;strokeColor=#82b366;fontColor=#2e6b3a;" vertex="1" parent="policy-1">
+          <mxGeometry x="40" y="80" width="520" height="56" as="geometry" />
+        </mxCell>
+        <mxCell id="policy-3" value="REVIEW" style="rounded=0;whiteSpace=wrap;html=1;fontStyle=1;fontFamily=Courier New;fontSize=13;fillColor=#ffe6cc;strokeColor=#d79b00;fontColor=#8a5a00;" vertex="1" parent="policy-1">
+          <mxGeometry x="560" y="80" width="190" height="56" as="geometry" />
+        </mxCell>
+        <mxCell id="policy-4" value="BLOCK" style="rounded=0;whiteSpace=wrap;html=1;fontStyle=1;fontFamily=Courier New;fontSize=13;fillColor=#f8cecc;strokeColor=#b85450;fontColor=#9e2f29;" vertex="1" parent="policy-1">
+          <mxGeometry x="750" y="80" width="330" height="56" as="geometry" />
+        </mxCell>
+        <mxCell id="policy-5" value="&lt;font face=&quot;Courier New&quot;&gt;0&lt;/font&gt;" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=top;fontSize=12;fontColor=#5d6763;fontFamily=Helvetica;" vertex="1" parent="policy-1">
+          <mxGeometry x="30" y="140" width="40" height="24" as="geometry" />
+        </mxCell>
+        <mxCell id="policy-6" value="&lt;font face=&quot;Courier New&quot;&gt;t_allow&lt;/font&gt;" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=top;fontSize=12;fontColor=#5d6763;fontFamily=Helvetica;" vertex="1" parent="policy-1">
+          <mxGeometry x="530" y="140" width="80" height="24" as="geometry" />
+        </mxCell>
+        <mxCell id="policy-7" value="&lt;font face=&quot;Courier New&quot;&gt;t_block&lt;/font&gt;" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=top;fontSize=12;fontColor=#5d6763;fontFamily=Helvetica;" vertex="1" parent="policy-1">
+          <mxGeometry x="720" y="140" width="80" height="24" as="geometry" />
+        </mxCell>
+        <mxCell id="policy-8" value="&lt;font face=&quot;Courier New&quot;&gt;1&lt;/font&gt;" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=top;fontSize=12;fontColor=#5d6763;fontFamily=Helvetica;" vertex="1" parent="policy-1">
+          <mxGeometry x="1070" y="140" width="40" height="24" as="geometry" />
+        </mxCell>
+        <mxCell id="policy-9" value="P — вероятность нарушения после стекинга. Ширина зон схематичная, реальные пороги — в models/policy.json." style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=top;fontSize=12;fontColor=#5d6763;fontFamily=Helvetica;" vertex="1" parent="policy-1">
+          <mxGeometry x="40" y="170" width="1040" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="policy-10" value="&lt;b&gt;t_allow: не пропустить нарушение&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:11px&quot; face=&quot;Courier New&quot; color=&quot;#5d6763&quot;&gt;максимальный порог, при котором&lt;/font&gt;&lt;br&gt;&lt;font style=&quot;font-size:11px&quot; face=&quot;Courier New&quot; color=&quot;#5d6763&quot;&gt;≥ 95% нарушений получают REVIEW или BLOCK&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=10;fontFamily=Helvetica;fontSize=13;fillColor=#ffffff;strokeColor=#82b366;align=left;spacingLeft=12;" vertex="1" parent="policy-1">
+          <mxGeometry x="40" y="230" width="330" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="policy-11" value="&lt;b&gt;t_block: автоблокировка без ошибок&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:11px&quot; face=&quot;Courier New&quot; color=&quot;#5d6763&quot;&gt;минимальный порог ≥ t_allow, при котором&lt;/font&gt;&lt;br&gt;&lt;font style=&quot;font-size:11px&quot; face=&quot;Courier New&quot; color=&quot;#5d6763&quot;&gt;точность BLOCK ≥ 90% → REVIEW минимальный&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=10;fontFamily=Helvetica;fontSize=13;fillColor=#ffffff;strokeColor=#b85450;align=left;spacingLeft=12;" vertex="1" parent="policy-1">
+          <mxGeometry x="395" y="230" width="340" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="policy-12" value="&lt;b&gt;Цели меняются в конфиге&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:11px&quot; face=&quot;Courier New&quot; color=&quot;#5d6763&quot;&gt;policy.target_recall&lt;/font&gt;&lt;br&gt;&lt;font style=&quot;font-size:11px&quot; face=&quot;Courier New&quot; color=&quot;#5d6763&quot;&gt;policy.target_block_precision&lt;/font&gt;&lt;br&gt;&lt;font style=&quot;font-size:11px&quot; face=&quot;Courier New&quot; color=&quot;#5d6763&quot;&gt;→ make calibrate, без переобучения&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=10;fontFamily=Helvetica;fontSize=13;fillColor=#ffffff;strokeColor=#d79b00;align=left;spacingLeft=12;" vertex="1" parent="policy-1">
+          <mxGeometry x="760" y="230" width="320" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="policy-13" value="Стекинг обучается на части A валидации, пороги подбираются на части B. Тест в подборе не участвует. Тексты со strong-правилом блокируются всегда и в обучение стекинга не входят." style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=top;fontSize=12;fontColor=#5d6763;fontFamily=Helvetica;" vertex="1" parent="policy-1">
+          <mxGeometry x="40" y="350" width="1040" height="50" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="offline" name="3. Обучение и оценка">
+    <mxGraphModel dx="1400" dy="800" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1400" pageHeight="460" math="0" shadow="0">
+      <root>
+        <mxCell id="offline-0" />
+        <mxCell id="offline-1" parent="offline-0" />
+        <mxCell id="offline-1" value="Обучение и оценка: make all" style="text;html=1;align=left;verticalAlign=middle;fontSize=20;fontStyle=1;fontColor=#1b201e;fontFamily=Helvetica;" vertex="1" parent="offline-1">
+          <mxGeometry x="40" y="10" width="700" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="offline-2" value="&lt;b&gt;Hugging Face&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:11px&quot; face=&quot;Courier New&quot; color=&quot;#5d6763&quot;&gt;AlexSham/&lt;/font&gt;&lt;br&gt;&lt;font style=&quot;font-size:11px&quot; face=&quot;Courier New&quot; color=&quot;#5d6763&quot;&gt;Toxic_Russian_Comments&lt;/font&gt;&lt;br&gt;&lt;font style=&quot;font-size:11px&quot; face=&quot;Courier New&quot; color=&quot;#5d6763&quot;&gt;223k + 25k&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=10;fontFamily=Helvetica;fontSize=13;fillColor=#ffffff;strokeColor=#9aa5a0;" vertex="1" parent="offline-1">
+          <mxGeometry x="40" y="160" width="180" height="96" as="geometry" />
+        </mxCell>
+        <mxCell id="offline-3" value="&lt;b&gt;Подготовка&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:11px&quot; face=&quot;Courier New&quot; color=&quot;#5d6763&quot;&gt;дубли · утечка (−23)&lt;/font&gt;&lt;br&gt;&lt;font style=&quot;font-size:11px&quot; face=&quot;Courier New&quot; color=&quot;#5d6763&quot;&gt;проверка меток&lt;/font&gt;&lt;br&gt;&lt;font style=&quot;font-size:11px&quot; face=&quot;Courier New&quot; color=&quot;#5d6763&quot;&gt;train / val / test&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=10;fontFamily=Helvetica;fontSize=13;fillColor=#ffffff;strokeColor=#9aa5a0;" vertex="1" parent="offline-1">
+          <mxGeometry x="260" y="160" width="180" height="96" as="geometry" />
+        </mxCell>
+        <mxCell id="offline-4" value="&lt;b&gt;train&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:11px&quot; face=&quot;Courier New&quot; color=&quot;#5d6763&quot;&gt;201k&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=10;fontFamily=Helvetica;fontSize=13;fillColor=#ffffff;strokeColor=#9aa5a0;" vertex="1" parent="offline-1">
+          <mxGeometry x="480" y="70" width="130" height="56" as="geometry" />
+        </mxCell>
+        <mxCell id="offline-5" value="&lt;b&gt;val&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:11px&quot; face=&quot;Courier New&quot; color=&quot;#5d6763&quot;&gt;22k · части A и B&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=10;fontFamily=Helvetica;fontSize=13;fillColor=#ffffff;strokeColor=#9aa5a0;" vertex="1" parent="offline-1">
+          <mxGeometry x="480" y="180" width="130" height="56" as="geometry" />
+        </mxCell>
+        <mxCell id="offline-6" value="&lt;b&gt;test&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:11px&quot; face=&quot;Courier New&quot; color=&quot;#5d6763&quot;&gt;25k&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=10;fontFamily=Helvetica;fontSize=13;fillColor=#ffffff;strokeColor=#9aa5a0;" vertex="1" parent="offline-1">
+          <mxGeometry x="480" y="290" width="130" height="56" as="geometry" />
+        </mxCell>
+        <mxCell id="offline-7" value="&lt;b&gt;Обучение моделей&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:11px&quot; face=&quot;Courier New&quot; color=&quot;#5d6763&quot;&gt;TF-IDF + LogReg · rubert-tiny2&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=10;fontFamily=Helvetica;fontSize=13;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="offline-1">
+          <mxGeometry x="650" y="70" width="220" height="56" as="geometry" />
+        </mxCell>
+        <mxCell id="offline-8" value="&lt;b&gt;Калибровка&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:11px&quot; face=&quot;Courier New&quot; color=&quot;#5d6763&quot;&gt;A: стекинг · B: пороги&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=10;fontFamily=Helvetica;fontSize=13;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="offline-1">
+          <mxGeometry x="650" y="180" width="220" height="56" as="geometry" />
+        </mxCell>
+        <mxCell id="offline-9" value="&lt;b&gt;Оценка&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:11px&quot; face=&quot;Courier New&quot; color=&quot;#5d6763&quot;&gt;метрики · устойчивость к обходам&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=10;fontFamily=Helvetica;fontSize=13;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="offline-1">
+          <mxGeometry x="650" y="290" width="220" height="56" as="geometry" />
+        </mxCell>
+        <mxCell id="offline-10" value="&lt;b&gt;Артефакты&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:11px&quot; face=&quot;Courier New&quot; color=&quot;#5d6763&quot;&gt;models/linear.joblib&lt;/font&gt;&lt;br&gt;&lt;font style=&quot;font-size:11px&quot; face=&quot;Courier New&quot; color=&quot;#5d6763&quot;&gt;models/transformer/&lt;/font&gt;&lt;br&gt;&lt;font style=&quot;font-size:11px&quot; face=&quot;Courier New&quot; color=&quot;#5d6763&quot;&gt;models/policy.json&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=10;fontFamily=Helvetica;fontSize=13;fillColor=#ffffff;strokeColor=#9aa5a0;" vertex="1" parent="offline-1">
+          <mxGeometry x="910" y="110" width="200" height="96" as="geometry" />
+        </mxCell>
+        <mxCell id="offline-11" value="&lt;b&gt;reports/&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:11px&quot; face=&quot;Courier New&quot; color=&quot;#5d6763&quot;&gt;metrics · tradeoff&lt;/font&gt;&lt;br&gt;&lt;font style=&quot;font-size:11px&quot; face=&quot;Courier New&quot; color=&quot;#5d6763&quot;&gt;benchmark · loadtest · SUMMARY&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=10;fontFamily=Helvetica;fontSize=13;fillColor=#ffffff;strokeColor=#9aa5a0;" vertex="1" parent="offline-1">
+          <mxGeometry x="910" y="282" width="200" height="72" as="geometry" />
+        </mxCell>
+        <mxCell id="offline-12" value="&lt;b&gt;Сервис&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:11px&quot; face=&quot;Courier New&quot; color=&quot;#5d6763&quot;&gt;make serve · Docker&lt;/font&gt;&lt;br&gt;&lt;font style=&quot;font-size:11px&quot; face=&quot;Courier New&quot; color=&quot;#5d6763&quot;&gt;GitHub Release&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=10;fontFamily=Helvetica;fontSize=13;fillColor=#ffffff;strokeColor=#9aa5a0;" vertex="1" parent="offline-1">
+          <mxGeometry x="1150" y="120" width="200" height="76" as="geometry" />
+        </mxCell>
+        <mxCell id="offline-13" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;endFill=1;strokeColor=#5d6763;fontSize=11;fontFamily=Courier New;fontColor=#5d6763;labelBackgroundColor=#ffffff;" edge="1" parent="offline-1" source="offline-2" target="offline-3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="offline-14" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;endFill=1;strokeColor=#5d6763;fontSize=11;fontFamily=Courier New;fontColor=#5d6763;labelBackgroundColor=#ffffff;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="offline-1" source="offline-3" target="offline-4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="offline-15" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;endFill=1;strokeColor=#5d6763;fontSize=11;fontFamily=Courier New;fontColor=#5d6763;labelBackgroundColor=#ffffff;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="offline-1" source="offline-3" target="offline-5">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="offline-16" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;endFill=1;strokeColor=#5d6763;fontSize=11;fontFamily=Courier New;fontColor=#5d6763;labelBackgroundColor=#ffffff;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="offline-1" source="offline-3" target="offline-6">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="offline-17" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;endFill=1;strokeColor=#5d6763;fontSize=11;fontFamily=Courier New;fontColor=#5d6763;labelBackgroundColor=#ffffff;" edge="1" parent="offline-1" source="offline-4" target="offline-7">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="offline-18" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;endFill=1;strokeColor=#5d6763;fontSize=11;fontFamily=Courier New;fontColor=#5d6763;labelBackgroundColor=#ffffff;" edge="1" parent="offline-1" source="offline-5" target="offline-8">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="offline-19" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;endFill=1;strokeColor=#5d6763;fontSize=11;fontFamily=Courier New;fontColor=#5d6763;labelBackgroundColor=#ffffff;" edge="1" parent="offline-1" source="offline-6" target="offline-9">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="offline-20" value="модели" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;endFill=1;strokeColor=#5d6763;fontSize=11;fontFamily=Courier New;fontColor=#5d6763;labelBackgroundColor=#ffffff;" edge="1" parent="offline-1" source="offline-7" target="offline-8">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="offline-21" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;endFill=1;strokeColor=#5d6763;fontSize=11;fontFamily=Courier New;fontColor=#5d6763;labelBackgroundColor=#ffffff;entryX=0;entryY=0.25;entryDx=0;entryDy=0;" edge="1" parent="offline-1" source="offline-7" target="offline-10">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="offline-22" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;endFill=1;strokeColor=#5d6763;fontSize=11;fontFamily=Courier New;fontColor=#5d6763;labelBackgroundColor=#ffffff;entryX=0;entryY=0.75;entryDx=0;entryDy=0;" edge="1" parent="offline-1" source="offline-8" target="offline-10">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="offline-23" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;endFill=1;strokeColor=#5d6763;fontSize=11;fontFamily=Courier New;fontColor=#5d6763;labelBackgroundColor=#ffffff;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=1;entryY=0.3;entryDx=0;entryDy=0;" edge="1" parent="offline-1" source="offline-10" target="offline-9">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="offline-24" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;endFill=1;strokeColor=#5d6763;fontSize=11;fontFamily=Courier New;fontColor=#5d6763;labelBackgroundColor=#ffffff;" edge="1" parent="offline-1" source="offline-9" target="offline-11">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="offline-25" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;endFill=1;strokeColor=#5d6763;fontSize=11;fontFamily=Courier New;fontColor=#5d6763;labelBackgroundColor=#ffffff;" edge="1" parent="offline-1" source="offline-10" target="offline-12">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

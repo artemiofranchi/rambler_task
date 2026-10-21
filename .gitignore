@@ -8,3 +8,4 @@ models/
 reports/smoke/
 *.tar.gz
 .DS_Store
+.idea/
