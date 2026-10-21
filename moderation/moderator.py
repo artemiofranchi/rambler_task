@@ -1,4 +1,5 @@
 """Moderator: нормализация → правила + линейная модель + трансформер → стекинг → решение."""
+import threading
 from dataclasses import dataclass, field
 
 import numpy as np
@@ -35,6 +36,7 @@ class Moderator:
                                   if use_normalization is None else use_normalization)
         self.max_chars = self.cfg["service"]["max_text_chars"]
         self.rules = RuleEngine()
+        self._lock = threading.Lock()
         self.models = {"linear": LinearModel.load(resolve(self.cfg["linear"]["path"]))}
         if self.cfg["transformer"]["enabled"]:
             from moderation.models.transformer import TransformerModel  # torch грузим только если нужен
@@ -57,7 +59,8 @@ class Moderator:
         hits = [self.rules.match(t) for t in norm]
         strong = np.array([any(h.strong for h in hs) for hs in hits], dtype=bool)
         weak = np.array([any(not h.strong for h in hs) for hs in hits], dtype=bool)
-        probs = {name: m.predict_proba(norm) for name, m in self.models.items()}
+        with self._lock:
+            probs = {name: m.predict_proba(norm) for name, m in self.models.items()}
         return Signals(norm, hits, strong, weak, probs)
 
     def moderate_batch(self, texts: list[str]) -> list[ModerationResult]:

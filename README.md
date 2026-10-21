@@ -285,7 +285,7 @@ make report             # сводка                → reports/SUMMARY.md
 | Переменная | По умолчанию | Назначение |
 |---|---|---|
 | `MODERATION_CONFIG` | `configs/config.yaml` | путь к конфигу |
-| `MODERATION_DEVICE` | `auto` | `cpu` / `cuda` / `mps` для трансформера |
+| `MODERATION_DEVICE` | `cpu` | устройство инференса трансформера в сервисе: `cpu` / `cuda` / `mps` / `auto` |
 | `MODERATION_USE_TRANSFORMER` | `true` | выключить трансформер (нужна перекалибровка: `make calibrate`) |
 | `MODERATION_TORCH_THREADS` | `0` (по умолчанию torch) | число потоков CPU |
 | `MODERATION_TARGET_RECALL` | `0.95` | доля нарушений, не получающих ALLOW (для `make calibrate`) |

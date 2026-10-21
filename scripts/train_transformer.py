@@ -42,7 +42,7 @@ def main():
     x_train, y_train = model_inputs(train["text"], cfg), train["label"].tolist()
     x_val = model_inputs(val["text"], cfg)
 
-    device = pick_device(tcfg["device"])
+    device = pick_device(tcfg.get("train_device", "auto"))
     print(f"база: {base} | устройство: {device} | train: {len(x_train)} | эпох: {epochs}")
     tokenizer = AutoTokenizer.from_pretrained(base)
     model = AutoModelForSequenceClassification.from_pretrained(base, num_labels=2).to(device)
@@ -79,7 +79,8 @@ def main():
     tokenizer.save_pretrained(out)
 
     model.eval()
-    p = TransformerModel.from_config(tcfg, out).predict_proba(x_val)
+    p = TransformerModel(out, tcfg.get("train_device", "auto"), tcfg["max_length"], tcfg["batch_size"]).predict_proba(
+        x_val)
     info = {"base_model": base, "device": str(device), "train_samples": len(x_train), "epochs": epochs,
             "train_minutes": round((time.time() - start) / 60, 1),
             "val_roc_auc": round(float(roc_auc_score(val["label"], p)), 4),

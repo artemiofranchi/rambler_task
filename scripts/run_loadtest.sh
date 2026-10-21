@@ -19,3 +19,4 @@ curl -sf "$URL/health" >/dev/null || { echo "сервис не поднялся"
 
 $PY scripts/loadtest.py --url "$URL" --mode single --concurrency "$CONCURRENCY" --duration "$DURATION"
 $PY scripts/loadtest.py --url "$URL" --mode batch --batch-size 64 --concurrency 4 --duration "$DURATION"
+kill -0 "$SERVER_PID" 2>/dev/null || { echo "ОШИБКА: сервис упал во время нагрузки"; exit 1; }
