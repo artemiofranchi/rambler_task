@@ -40,10 +40,16 @@ async def worker(client, args, texts, stop_at, lat, counters):
         try:
             r = await client.post(url, json=payload)
             ok = r.status_code == 200
+        except (httpx.ConnectError, httpx.RemoteProtocolError):
+            counters["server_down"] = True  # сервис недоступен — дальше мерить нечего
+            return
         except httpx.HTTPError:
             ok = False
         lat.append(time.perf_counter() - start)
-        counters["messages" if ok else "errors"] += n
+        if ok:
+            counters["messages"] += n
+        else:
+            counters["errors"] += 1
 
 
 async def main_async(args):
@@ -58,6 +64,8 @@ async def main_async(args):
         await asyncio.gather(*[worker(client, args, texts, start + args.duration, lat, counters)
                                for _ in range(args.concurrency)])
         elapsed = time.perf_counter() - start
+    if counters.get("server_down"):
+        sys.exit(f"ОШИБКА: сервис перестал отвечать во время теста ({args.mode}); смотрите лог сервиса выше")
     ms = np.array(lat) * 1000
     result = {"mode": args.mode, "concurrency": args.concurrency, "duration_s": round(elapsed, 1),
               "batch_size": args.batch_size if args.mode == "batch" else 1,

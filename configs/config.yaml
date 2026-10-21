@@ -29,7 +29,8 @@ transformer:             # дообученный rubert-tiny2
   epochs: 1
   lr: 5.0e-5
   max_train_samples: 120000   # подвыборка для обучения за ~10–20 мин на ноутбуке; null = весь train
-  device: auto           # auto | cpu | cuda | mps
+  train_device: auto     # обучение: auto = CUDA → Apple MPS → CPU
+  device: cpu            # инференс сервиса: cpu (по умолчанию) | cuda | mps | auto
   num_threads: 0         # потоки torch на CPU, 0 = по умолчанию
 
 policy:
